@@ -1,2 +1,2 @@
 # MarvelPage
- Marvel's page on Svelte
+ Marvel's page on React
