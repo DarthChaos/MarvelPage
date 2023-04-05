@@ -27,11 +27,9 @@ const handlerComicByName = async (
 
     try {
       const data = await axios.get(apiUrl);
-      console.log(data);
       const character = JSON.parse(
         JSON.stringify(data.data["data"].results[0]),
       );
-      console.log(character);
       res.status(200).json(character);
     } catch (e) {
       console.log(e);

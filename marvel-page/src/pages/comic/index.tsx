@@ -1,6 +1,6 @@
 import Container from "@/components/container";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { IoArrowForward } from "react-icons/io5";
 import Descriptor from "./Descriptor";
 import SubHeader from "./SubHeader";
@@ -8,12 +8,14 @@ import useSWR from "swr";
 
 const Comic = () => {
   // const res = useSWR(() => "/api/characters/wasp", fetcher);
+  const [data, setData] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
     // setLoading(true)
     fetch("/api/comics/Wasp")
-      .then((res) => res.text())
+      .then((res) => res.json())
       .then((data) => {
+        setData(data);
         console.log(data);
         // setData(data)
         // setLoading(false)
@@ -38,7 +40,7 @@ const Comic = () => {
               </div>
               <div className='w-full'>
                 <h1 className='hidden lg:block font-extrabold text-[26px] tracking-1px mb-5'>
-                  Wasp (2023) #3
+                  {data.title}
                 </h1>
                 <div className='flex flex-col gap-5 mb-8'>
                   <Descriptor title='Published' description='March 22, 2023' />
