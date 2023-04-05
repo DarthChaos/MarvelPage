@@ -9,6 +9,9 @@ module.exports = {
         "dark-black": "#151515",
       },
     },
+    letterSpacing: {
+      "1px": "1px",
+    },
   },
   plugins: [],
 };

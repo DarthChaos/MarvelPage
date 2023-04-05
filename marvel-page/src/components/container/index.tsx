@@ -5,11 +5,13 @@ const Container = ({
   className = "",
   ...props
 }: HTMLAttributes<HTMLDivElement>) => {
-  const newClass = `px-5 ${className}`;
+  const newClass = `${className}`;
 
   return (
     <div className={newClass}>
-      <div {...props} className='max-w-screen-xl w-full h-[inherit] mx-auto '>
+      <div
+        {...props}
+        className='px-5 max-w-[1225px] w-full h-[inherit] mx-auto'>
         {children}
       </div>
     </div>
