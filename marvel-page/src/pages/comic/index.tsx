@@ -1,28 +1,24 @@
 import Container from "@/components/container";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { IoArrowForward } from "react-icons/io5";
 import Descriptor from "./Descriptor";
 import SubHeader from "./SubHeader";
-// import useSWR from "swr";
-
-const fetcher = async (url: string) => {
-  console.log(url);
-  const res = await fetch(url);
-  const data = await res.json();
-  console.log(res, data);
-
-  if (res.status !== 200) {
-    throw new Error(data.message);
-  }
-  return data;
-};
+import useSWR from "swr";
 
 const Comic = () => {
-  // const res = useSWR<{ [key: string]: string }>(
-  //   () => "/api/characters/wasp",
-  //   fetcher,
-  // );
+  // const res = useSWR(() => "/api/characters/wasp", fetcher);
+
+  useEffect(() => {
+    // setLoading(true)
+    fetch("/api/comics/Wasp")
+      .then((res) => res.text())
+      .then((data) => {
+        console.log(data);
+        // setData(data)
+        // setLoading(false)
+      });
+  }, []);
 
   // console.log(res);
 

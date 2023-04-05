@@ -6,27 +6,28 @@ import { NextApiRequest, NextApiResponse } from "next";
 const publicKey = "77989cd1b9b55360e5dad825e78d3f52";
 const privateKey = "635de7065008cffc26c33dd559b8ab368220697a";
 
-export const handlerCharacterByName = async (
+const handlerComicByName = async (
   req: NextApiRequest,
   res: NextApiResponse,
 ) => {
   const { name } = req.query;
-  console.log(name);
 
   if (name !== "undefined") {
     const api =
-      "https://gateway.marvel.com:443/v1/public/characters?name=" +
+      "https://gateway.marvel.com:443/v1/public/comics?title=" +
       name +
       "&limit=1";
     const timestamp = new Date().toISOString();
     const hash = createHash("md5")
       .update(timestamp + privateKey + publicKey)
       .digest("hex");
-    // Again,
-    const apiUrl = api + timestamp + "&apikey=" + publicKey + "&hash=" + hash;
+    // Again, URLParams must be here
+    const apiUrl =
+      api + "&ts=" + timestamp + "&apikey=" + publicKey + "&hash=" + hash;
 
     try {
       const data = await axios.get(apiUrl);
+      console.log(data);
       const character = JSON.parse(
         JSON.stringify(data.data["data"].results[0]),
       );
@@ -40,3 +41,5 @@ export const handlerCharacterByName = async (
 
   res.status(400).end();
 };
+
+export default handlerComicByName;
